@@ -1,0 +1,48 @@
+<html>
+	<head th:replace="~{base :: head}"></head>
+	<body>
+		<div th:replace="~{base :: logo}"></div>
+	
+		<div class="container">
+			<div th:replace="~{base :: title('New Order')}"></div>
+			
+			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
+				<div th:replace="~{base :: navigation}"></div>
+			</nav>
+			
+			<form th:object="${requestNewProduct}" action="/order/newOrder" method="POST">
+				<div class="card p-3" >
+					<div class="mb-3">
+						<label for="productName" class="form-label">Product</label>
+						<input th:field="*{productName}" th:errorclass="is-invalid" class="form-control" placeholder="Name of the product"/>
+						<small>Insert the name of the product</small>
+						<div th:errors="*{productName}" class="invalid-feedback">
+							Errors from product name field
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="urlProduct" class="form-label">URL</label>
+						<input th:field="*{urlProduct}" th:errorclass="is-invalid" class="form-control" name="urlProduct" placeholder="Url of the product"/>
+						<small>Look for this product in a website and copy the url of the product here</small>
+					<div th:errors="*{urlProduct}" class="invalid-feedback">
+						Errors from product url field
+					</div>
+					</div>					
+					<div class="mb-3">
+						<label for="productImage" class="form-label">Image</label>
+						<input th:field="*{productImage}" th:errorclass="is-invalid" class="form-control" name="productImage" placeholder="Url of the image of the product"/>
+						<small>Look for a good quality image of the desired product and copy the url of the image here</small>
+					<div th:errors="*{productImage}" class="invalid-feedback">
+						Errors from product image field
+					</div>
+					</div>
+					<div class="mb-3">
+						<label for="productDescription" class="form-label">Description</label>
+						<textarea th:field="*{productDescription}" class="form-control" rows="2" name="productDescription" placeholder="Description of the product"></textarea>
+					</div>
+					<button type="submit" class="btn btn-secondary">Submit</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>	
