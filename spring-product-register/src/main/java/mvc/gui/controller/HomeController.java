@@ -31,7 +31,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("/{status}")
-	public String waiting(@PathVariable("status") String status, Model model) {
+	public String statusListing(@PathVariable("status") String status, Model model) {
 		
 		List<Product> product = productRepository.findByStatus(OrderStatus.valueOf(status.toUpperCase()));
 		model.addAttribute("orders", product);
@@ -43,6 +43,12 @@ public class HomeController {
 	@ExceptionHandler(IllegalArgumentException.class)
 	public String onError() {
 		return "redirect:/home";
+	}
+	
+	@GetMapping("/order/form")
+	public String redirectFormFromStatus() {
+		return "redirect:/order/form";
+		
 	}
 	
 }
